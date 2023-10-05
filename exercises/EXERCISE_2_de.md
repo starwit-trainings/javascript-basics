@@ -21,6 +21,5 @@
 
 ## Challenges
 - Sorgen Sie dafür, dass sich der erste Button erst nach Ablauf einer festen Zeit (z.B. 2 Sekunden) wieder aktivieren lässt
-- Machen Sie die Cooldown-Zeit konfigurierbar
 - Zeigen Sie den Cooldown-Countdown an
 - ...
