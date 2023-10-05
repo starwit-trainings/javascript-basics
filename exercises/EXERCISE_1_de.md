@@ -6,6 +6,7 @@
 - Erste Kontakte mit relevanten Technologien (JS, HTML, DOM)
 
 ## Voraussetzungen
+- Ein Editor / eine IDE mit Syntaxhighlighting für HTML, JS und CSS (bsp. Visual Studio Code), Autovervollständigung etc. ist nützlich aber nicht unbedingt notwendig
 - Git (um dieses Repository zu klonen)
 - NPM (für den Dev-Server)
     - http-server aus NPMJS installiert\
