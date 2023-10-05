@@ -18,7 +18,7 @@
   `http-server . -c-1` (`-c-1` verhindert das Cachen der Dateien durch den Browser)
 
 ## Hinweise
-- Hier ist das erste und letzte Mal, dass wir die `alert()`-Funktion des Browsers benutzen werden. Diese sollte in echten Projekten nur in absoluten Ausnahmefällen, weil sie sämtliche User-Interaktion unterbricht und sowohl im Styling als auch Verhalten außerhalb der Kontrolle der Website ist.
+- Hier ist das erste und letzte Mal, dass wir die `alert()`-Funktion des Browsers benutzen werden. Diese sollte in echten Projekten nur in absoluten Ausnahmefällen zum Einsatz kommen, weil sie sämtliche User-Interaktion unterbricht und sowohl im Styling als auch Verhalten außerhalb der Kontrolle der Website ist.
 - Um herauszufinden, welche HTML-Elemente und Attribute sie verwenden müssen / können, machen sie sich mit der Dokumentation vertraut bsp. unter https://developer.mozilla.org/en-US/docs/Web/HTML/Reference
 
 ## Challenges
