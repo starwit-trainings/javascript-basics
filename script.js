@@ -15,6 +15,8 @@ helloWorldButton.addEventListener("click", () => {
 });
 
 resetButton.addEventListener("click", () => {
+    if (!helloWorldButton.disabled) return;
+
     helloWorldButton.disabled = false;
     
     buttonCooldownActive = true;
