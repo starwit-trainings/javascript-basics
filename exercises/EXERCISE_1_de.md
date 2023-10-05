@@ -8,10 +8,14 @@
 ## Voraussetzungen
 - Git (um dieses Repository zu klonen)
 - NPM (für den Dev-Server)
+    - http-server aus NPMJS installiert\
+      `npm install -g http-server`
 
 ## Bearbeitungsschritte
 - Vervollständigen sie die `index.html` so, dass ein Button zu sehen ist
 - Fügen sie einen `<script>`-Abschnitt (XML-Node) hinzu, in dem sie auf das `click`-Event des Buttons mit der Anzeige einer Meldung reagieren (`alert()`)
+- Starten sie zum lokalen Testen den `http-server` aus npmjs:\
+  `http-server . -c-1` (`-c-1` verhindert das Cachen der Dateien durch den Browser)
 
 ## Hinweise
 - Hier ist das erste und letzte Mal, dass wir die `alert()`-Funktion des Browsers benutzen werden. Diese sollte in echten Projekten nur in absoluten Ausnahmefällen, weil sie sämtliche User-Interaktion unterbricht und sowohl im Styling als auch Verhalten außerhalb der Kontrolle der Website ist.
