@@ -56,6 +56,9 @@ class Game {
 
 const effectArea = document.querySelector("#effect-area");
 const textOutput = document.querySelector("#text-output");
+const resultList = document.querySelector("#results");
+
+const reactionTimeHistory = [];
 
 const game = new Game(() => {
     effectArea.style.backgroundColor = "grey";
@@ -69,7 +72,25 @@ function registerUserInput() {
     } else if (game.isTriggered()) {
         const reactionTime = game.userClicked();
         textOutput.innerHTML = `Your reaction time: <b>${reactionTime}ms</b><br>Click to restart`;
+        reactionTimeHistory.push(reactionTime);
+        updateHistory();
     };
+}
+
+function updateHistory() {
+    const average = reactionTimeHistory.reduce((a,b) => a+b) / reactionTimeHistory.length;
+    const avgSpan = document.createElement("span");
+    avgSpan.textContent = `Average (n=${reactionTimeHistory.length}): ${average.toFixed()}ms`
+    avgSpan.className = "history-item";
+
+    resultList.replaceChildren(
+        avgSpan,
+        ...reactionTimeHistory.map((time, idx) => {
+            const elem = document.createElement("span");
+            elem.textContent = `${idx+1}. ${time}ms`;
+            elem.className = "history-item";
+            return elem;
+    }).reverse());
 }
 
 effectArea.addEventListener("mousedown", registerUserInput);
@@ -77,4 +98,3 @@ effectArea.addEventListener("mousedown", registerUserInput);
 window.addEventListener("keydown", event => {
     if (event.key === " ") registerUserInput();
 });
-    
