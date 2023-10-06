@@ -18,23 +18,36 @@ body {
     width: 100%;
     height: 100%;
     display: grid;
+    grid-template-rows: 5fr [game-elements] 100px 1fr [history] 4fr;
+    /* This refers to #results. Overflow must also be set 
+    on the container element for some reason... but it works */
+    overflow: hidden;
 }
 
 #game-elements {
+    grid-row: game-elements;
     justify-self: center;
     align-self: center;
-    height: 100px;
+    height: 100%;
     width: 100%;
     display: grid;
-    grid-template-areas: 
-        "text-output"
-        "game-button";
 }
 
 #text-output {
     justify-self: center;
     align-self: center;
-    grid-area: text-output;
     font-size: x-large;
     text-align: center;
+}
+
+#results {
+    grid-row: history;
+    justify-self: center;
+    overflow: hidden;
+    max-height: 100%;
+}
+
+.history-item {
+    display: block;
+    text-align: right;
 }
