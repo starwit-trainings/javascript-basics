@@ -55,7 +55,6 @@ class Game {
 }
 
 const effectArea = document.querySelector("#effect-area");
-const gameButton = document.querySelector("#game-button");
 const textOutput = document.querySelector("#text-output");
 
 const game = new Game(() => {
@@ -63,18 +62,19 @@ const game = new Game(() => {
     setTimeout(() => effectArea.style.backgroundColor = "white", 100);
 });
 
-gameButton.addEventListener("click", () => {
-    gameButton.disabled = true;
-    textOutput.textContent = "Click the white area, when it flashes";
-    game.start();
-});
+function registerUserInput() {
+    if (game.isReady()) {
+        textOutput.textContent = "Click the white area, when it flashes (or hit SPACE)";
+        game.start();
+    } else if (game.isTriggered()) {
+        const reactionTime = game.userClicked();
+        textOutput.textContent = `Your reaction time: ${reactionTime}ms\nClick to restart`;
+    };
+}
 
-effectArea.addEventListener("mousedown", event => {
-    if (!game.isTriggered()) return;
-    
-    const reactionTime = game.userClicked();
+effectArea.addEventListener("mousedown", registerUserInput);
 
-    textOutput.textContent = `Your reaction time: ${reactionTime}ms`;
-    gameButton.disabled = false;
+window.addEventListener("keydown", event => {
+    if (event.key === " ") registerUserInput();
 });
     
