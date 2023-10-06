@@ -13,19 +13,21 @@ function CooldownTimer(cooldownTime, progressTick) {
     }
 
     function start(progressCallback) {
-        active = true;
-        startTime = Date.now();
-        let intervalHandle;
-
-        setTimeout(() => {
-            active = false;
-            clearInterval(intervalHandle);
-            progressCallback(0);
-        }, cooldownTime);
-
-        intervalHandle = setInterval(() => {
-            progressCallback(getRemaining());
-        }, progressTick);
+        return new Promise(resolve => {
+            active = true;
+            startTime = Date.now();
+            let intervalHandle;
+    
+            setTimeout(() => {
+                active = false;
+                clearInterval(intervalHandle);
+                resolve();
+            }, cooldownTime);
+    
+            intervalHandle = setInterval(() => {
+                progressCallback(getRemaining());
+            }, progressTick);
+        })
     }
 
     return {
@@ -46,16 +48,13 @@ helloWorldButton.addEventListener("click", () => {
     helloWorldButton.textContent = "clicked";
 });
 
-resetButton.addEventListener("click", () => {
+resetButton.addEventListener("click", async () => {
     if (timer.isActive()) return;
 
-    timer.start(remaining => {
-        if (remaining > 0) {
-            helloWorldButton.textContent = `Wait for ${(remaining/1000).toFixed(2)}s...`;
-        } else {
-            helloWorldButton.textContent = `Hello World`;
-            helloWorldButton.disabled = false;
-        }
+    await timer.start(remaining => {
+        helloWorldButton.textContent = `Wait for ${(remaining/1000).toFixed(2)}s...`;
     });
     
+    helloWorldButton.textContent = `Hello World`;
+    helloWorldButton.disabled = false;
 });
