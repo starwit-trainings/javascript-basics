@@ -1,36 +1,61 @@
 "use strict";
 
-let cooldownTime = 2000;
+function CooldownTimer(cooldownTime, progressTick) {
+    let startTime;
+    let active = false;
+
+    function isActive() {
+        return active;
+    }
+
+    function getRemaining() {
+        return cooldownTime - (Date.now() - startTime);
+    }
+
+    function start(progressCallback) {
+        active = true;
+        startTime = Date.now();
+        let intervalHandle;
+
+        setTimeout(() => {
+            active = false;
+            clearInterval(intervalHandle);
+            progressCallback(0);
+        }, cooldownTime);
+
+        intervalHandle = setInterval(() => {
+            progressCallback(getRemaining());
+        }, progressTick);
+    }
+
+    return {
+        start,
+        isActive,
+    }
+}
+
+const timer = CooldownTimer(2000, 50);
 
 const helloWorldButton = document.querySelector("#hello-world");
 const resetButton = document.querySelector("#reset");
 
-let buttonCooldownActive = false;
-
 helloWorldButton.addEventListener("click", () => {
-    if (buttonCooldownActive) return;
+    if (timer.isActive()) return;
     
     helloWorldButton.disabled = true;
     helloWorldButton.textContent = "clicked";
 });
 
 resetButton.addEventListener("click", () => {
-    if (!helloWorldButton.disabled) return;
+    if (timer.isActive()) return;
 
-    helloWorldButton.disabled = false;
+    timer.start(remaining => {
+        if (remaining > 0) {
+            helloWorldButton.textContent = `Wait for ${(remaining/1000).toFixed(2)}s...`;
+        } else {
+            helloWorldButton.textContent = `Hello World`;
+            helloWorldButton.disabled = false;
+        }
+    });
     
-    buttonCooldownActive = true;
-    let cooldownStartTime = Date.now();
-
-    const cooldownIntervalHandle = setInterval(() => {
-        const cooldownCountdown = cooldownTime - (Date.now() - cooldownStartTime);
-        helloWorldButton.textContent = `Wait for ${(cooldownCountdown/1000).toFixed(2)}s...`;
-    }, 50);
-    
-    setTimeout(() => {
-        buttonCooldownActive = false;
-        clearInterval(cooldownIntervalHandle);
-        helloWorldButton.textContent = "Hello World";
-    }, 2000);
-
 });
