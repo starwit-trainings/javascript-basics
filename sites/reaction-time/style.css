@@ -36,4 +36,5 @@ body {
     align-self: center;
     grid-area: text-output;
     font-size: x-large;
+    text-align: center;
 }

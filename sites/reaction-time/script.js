@@ -68,7 +68,7 @@ function registerUserInput() {
         game.start();
     } else if (game.isTriggered()) {
         const reactionTime = game.userClicked();
-        textOutput.textContent = `Your reaction time: ${reactionTime}ms\nClick to restart`;
+        textOutput.innerHTML = `Your reaction time: <b>${reactionTime}ms</b><br>Click to restart`;
     };
 }
 
