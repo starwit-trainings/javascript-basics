@@ -1,0 +1,18 @@
+body {
+    font-family: sans-serif;
+    height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: [header] 80px [content] auto;
+}
+
+.header {
+    grid-row: header;
+    justify-self: center;
+}
+
+.content {
+    grid-row: content;
+    justify-self: center;
+}
