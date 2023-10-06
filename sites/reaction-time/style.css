@@ -31,15 +31,9 @@ body {
         "game-button";
 }
 
-#game-button {
-    height: 100%;
-    width: 150px;
-    grid-area: game-button;
-    justify-self: center;
-}
-
 #text-output {
     justify-self: center;
     align-self: center;
     grid-area: text-output;
+    font-size: x-large;
 }
