@@ -6,6 +6,167 @@
     <title>Document</title>
 </head>
 <body>
+    <button type="button">Click me</button>
 
+    <script>
+        
+        // let regExpVariable = /\w+/;
+
+        // const match = regExpVariable.exec("asdf");
+        // console.log(match);
+
+        // // Kommentar
+
+        // /* Block
+        // kommentar */
+
+        // const arr = [1,2,3];
+        // arr[0] = 99;
+        // console.log(arr);
+        // // This doesn't work
+        // // arr = [3,2,1];
+
+        // obj = {
+        //     attribute1: 1,
+        //     attribute2: "2",
+        //     attribute3: {
+        //         subattribute1: "att",
+        //     }
+        // };
+        // console.log(obj);
+        // console.log(obj["attribute1"]);
+        // console.log(obj.attribute2);
+
+        // console.log(JSON.stringify(obj));
+
+        // obj2 = JSON.parse('{"attribute1":1,"attribute2":"2","attribute3":{"subattribute1":"att"}}');
+        // console.log(obj2);
+
+        // console.log(obj2.toString());
+
+        // // Functions
+
+        // function func1() {
+
+        // }
+
+        // const func2 = function() {
+
+        // }
+
+        // const func3 = () => {
+            
+        // }
+
+        
+        // // Control Structure
+
+        // if (number1 === 1) {
+        //     console.log("number1 == 1");
+        // } else {
+        //     console.log("number1 != 1");
+        // }
+
+        // // switch case
+
+        // switch("test") {
+        //     case "test": {
+        //         console.log("test");
+        //         break;
+        //     }
+        //     default: {
+        //         console.log("default");
+        //     }
+        // }
+
+        // // while
+
+        // let i = 0;
+        // while (i < 10) {
+        //     console.log(i);
+        //     i++;
+        // }
+        
+        // let j = 0;
+        // do {    
+        //     console.log(j);
+        //     j = j + 1;
+        // } while (j < 10);
+
+        // ;
+        // for (let k = 0; k < 11; k++) {
+        //     console.log(k);
+        // }
+
+        arr2 = [1,2,4,8,16];
+
+        for (n of arr2) {
+            console.log(n);
+        }
+
+        obj2 = {
+            0: 1,
+            1: 2,
+            2: 4,
+            3: 8,
+            4: 16,
+            "test": "testvalue"
+        }
+
+        for (m of obj2) {
+            console.log(m);
+        }
+        
+        // Event loop
+
+        let number1 = 1;
+
+        const button = document.querySelector("button");
+
+        setInterval(() => {
+            number1++;
+        }, 50);
+
+        button.addEventListener("click", () => {
+            console.log(`number1=${number1}`);
+            number1++;
+            console.log(`number1=${number1}`);
+        });
+
+        console.log("Skript Ende");
+
+        /*
+
+        () => {
+            number1++;
+        },
+        () => {
+            number1++;
+        },
+        () => {
+            number1++;
+        },
+        () => {
+            number1++;
+        },
+        () => {
+            number1++;
+        },
+        () => {
+            console.log(`number1=${number1}`);
+            number1++;
+            console.log(`number1=${number1}`);
+        },
+        () => {
+            number1++;
+        },
+        
+
+
+        */
+
+
+
+    </script>
 </body>
 </html>
