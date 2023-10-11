@@ -26,6 +26,7 @@ async function loadUserDetails(userid) {
 const userlist = await loadUsers();
 console.log(`Got user list: ${userlist.map(([_, name]) => name)}`);
 
+// naive
 for (const [userid, _] of userlist) {
     const user = await loadUserDetails(userid);
     console.log(`Got user details for ${user.name}: ${JSON.stringify(user)}`);
@@ -37,3 +38,14 @@ for (const [userid, _] of userlist) {
     }
 }
 
+// optimized
+// const userPromises = userlist.map(([id, _]) => loadUserDetails(id));
+// for await (const user of userPromises) {
+//     console.log(`Got user details for ${user.name}: ${JSON.stringify(user)}`);
+
+//     if (user.manager !== null) {
+//         console.log(`Loading manager for ${user.name}`);
+//         const manager = await loadUserDetails(user.manager);
+//         console.log(`Got manager for ${user.name}: ${JSON.stringify(manager)}`);
+//     }
+// }
