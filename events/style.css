@@ -1,0 +1,28 @@
+body {
+    font-family: sans-serif;
+    height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#outerDiv {
+    height: 50%;
+    margin: 10px;
+    padding: 10px;
+    border: solid 2px black;
+    background-color: grey;
+}
+
+#innerDiv {
+    height: 50%;
+    margin: 10px;
+    padding: 10px;
+    border: solid 2px black;
+    background-color: lightgrey;
+}
+
+#anotherButton {
+    position: absolute;
+    top: 25%;
+    left: 40%;
+}
