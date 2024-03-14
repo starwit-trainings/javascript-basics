@@ -1,61 +1,39 @@
 "use strict";
 
-function CooldownTimer(cooldownTime, progressTick) {
-    let startTime;
-    let active = false;
+function createTimerFunction(cooldownTime, button) {
+    let buttonCooldownActive = false;
 
-    function isActive() {
-        return active;
-    }
+    button.addEventListener("click", () => {
+        if (buttonCooldownActive) return;
+        
+        button.disabled = true;
+        button.textContent = "clicked";
+    });
 
-    function getRemaining() {
-        return cooldownTime - (Date.now() - startTime);
-    }
+    return function() {
+        if (!button.disabled) return;
 
-    function start(progressCallback) {
-        active = true;
-        startTime = Date.now();
-        let intervalHandle;
+        button.disabled = false;
+        
+        buttonCooldownActive = true;
+        let cooldownStartTime = Date.now();
 
+        const cooldownIntervalHandle = setInterval(() => {
+            const cooldownCountdown = cooldownTime - (Date.now() - cooldownStartTime);
+            button.textContent = `Wait for ${(cooldownCountdown/1000).toFixed(2)}s...`;
+        }, 50);
+        
         setTimeout(() => {
-            active = false;
-            clearInterval(intervalHandle);
-            progressCallback(0);
+            buttonCooldownActive = false;
+            clearInterval(cooldownIntervalHandle);
+            button.textContent = "Hello World";
         }, cooldownTime);
-
-        intervalHandle = setInterval(() => {
-            progressCallback(getRemaining());
-        }, progressTick);
-    }
-
-    return {
-        start,
-        isActive,
-    }
+    };
 }
-
-const timer = CooldownTimer(2000, 50);
 
 const helloWorldButton = document.querySelector("#hello-world");
 const resetButton = document.querySelector("#reset");
 
-helloWorldButton.addEventListener("click", () => {
-    if (timer.isActive()) return;
-    
-    helloWorldButton.disabled = true;
-    helloWorldButton.textContent = "clicked";
-});
+const timerFunction = createTimerFunction(2000, helloWorldButton);
 
-resetButton.addEventListener("click", () => {
-    if (timer.isActive()) return;
-
-    timer.start(remaining => {
-        if (remaining > 0) {
-            helloWorldButton.textContent = `Wait for ${(remaining/1000).toFixed(2)}s...`;
-        } else {
-            helloWorldButton.textContent = `Hello World`;
-            helloWorldButton.disabled = false;
-        }
-    });
-    
-});
+resetButton.addEventListener("click", timerFunction);
