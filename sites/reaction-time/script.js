@@ -1,16 +1,14 @@
 "use strict";
 
-
 document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("start-button");
     const effectArea = document.getElementById("effect-area");
-    const gameStatus = document.getElementById("game-status"); // Verweis auf das neue Textfeld
+    const gameStatus = document.getElementById("game-status");
 
     let gameRunning = false;
     let startTime;
 
-    startButton.addEventListener("click", function () {
-       
+    document.body.addEventListener("keydown", function (event) {
         if (!gameRunning) {
             startButton.textContent = "Game Running";
             startButton.style.display = "none";
@@ -24,17 +22,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 startTime = new Date().getTime();
                 document.body.style.backgroundColor = "gold";
                 setTimeout(function () {
-                document.body.style.backgroundColor = "white";
+                    document.body.style.backgroundColor = "white";
                 }, 200);
                 setTimeout(function () {
-                effectArea.style.backgroundColor = "red";
-                }, 100); 
-                }, randomTime);
-                }
-            });
-
-    effectArea.addEventListener("click", function () {
-        if (gameRunning) {
+                    effectArea.style.backgroundColor = "red";
+                }, 100);
+            }, randomTime);
+        } else {
             const endTime = new Date().getTime();
             const reactionTime = endTime - startTime;
             alert("Your reaction time: " + reactionTime + " milliseconds");
@@ -43,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function resetGame() {
-        startButton.textContent = "Start Game";
+        startButton.textContent = "Press any Key to Start";
         startButton.style.display = "block";
         effectArea.style.display = "none";
         gameStatus.textContent = "Game Status: Not Started";
