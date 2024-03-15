@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#game-container {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+#start-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#effect-area {
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    display: none;
+}
+
+#game-status {
+    margin-top: 20px;
+    font-size: 24px;
+}
