@@ -4,8 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("start-button");
     const effectArea = document.getElementById("effect-area");
     const gameStatus = document.getElementById("game-status");
-    const attemptsList = document.getElementById("attempts-list"); // Neues Element für die Versuchsliste
-    const averageDisplay = document.getElementById("average-display"); // Neues Element für die Anzeige des Durchschnitts
+    const attemptsList = document.getElementById("attempts-list"); 
+    const averageDisplay = document.getElementById("average-display"); 
+    const medianDisplay = document.getElementById("median-display");
 
     let gameRunning = false;
     let startTime;
@@ -17,6 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
             startButton.style.display = "none";
             effectArea.style.display = "block";
             gameStatus.textContent = "Game Status: Running"; // Aktualisierung des Spielstatus
+            averageDisplay.style.display = "none"; // Durchschnittsanzeige ausblenden
+            attemptsList.style.display = "none"; // Versuchsliste ausblenden
+            medianDisplay.style.display = "none"; // Mediananzeige ausblenden
             gameRunning = true;
 
             // Zufällige Zeit bis zum Effekt
@@ -37,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
             attempts.unshift(reactionTime); // Fügt die Reaktionszeit am Anfang der Versuchsliste hinzu
             displayAttempts(); // Zeigt die Versuche an
             displayAverage(); // Zeigt den Durchschnitt an
+            displayMedian(); // Zeigt den Median
             alert("Your reaction time: " + reactionTime + " milliseconds");
             resetGame();
         }
@@ -49,9 +54,13 @@ document.addEventListener("DOMContentLoaded", function () {
         gameStatus.textContent = "Game Status: Not Started";
         gameRunning = false;
         effectArea.style.backgroundColor = "black";
+        averageDisplay.style.display = "block";
+        attemptsList.style.display = "block";
+        medianDisplay.style.display = "block";
+        displayAverage();
     }
 
-    // Neue Funktion zum Anzeigen der Versuche
+    // Anzeigen der Versuche
     function displayAttempts() {
         attemptsList.innerHTML = ""; // Löscht die aktuelle Versuchsliste
         attempts.forEach((attempt, index) => {
@@ -61,10 +70,31 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Neue Funktion zum Berechnen und Anzeigen des Durchschnitts
-    function displayAverage() {
+// Berechnen und Anzeigen des Durchschnitts
+function displayAverage() {
+    if (!gameRunning) { // Überprüfen, ob das Spiel läuft
         const sum = attempts.reduce((a, b) => a + b, 0);
         const average = sum / attempts.length;
         averageDisplay.textContent = `Average Response Time: ${average} Milliseconds`;
+    } else {
+        averageDisplay.textContent = ""; // Textinhalt leeren wenn das Spiel läuft
     }
+}
+
+
+    // Median berechnen
+    function displayMedian() {
+        const sortedAttempts = [...attempts].sort((a, b) => a - b); // Kopieren und sortieren der Versuche
+        let median;
+        if (sortedAttempts.length % 2 === 0) {
+            median = (sortedAttempts[sortedAttempts.length / 2 - 1] + sortedAttempts[sortedAttempts.length / 2]) / 2; // Wenn die Anzahl der Versuche gerade ist, ist der Median der Durchschnitt der beiden mittleren Elemente
+        } else {          
+            median = sortedAttempts[(sortedAttempts.length - 1) / 2]; // Wenn die Anzahl der Versuche ungerade ist, ist der Median das mittlere Element
+        }
+    
+        medianDisplay.textContent = `Median: ${median} Milliseconds`;
+    }
+
+
+
 });
