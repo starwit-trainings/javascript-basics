@@ -16,10 +16,18 @@ Luckily, `git rebase` has a feature making this very simple: `git rebase --updat
 For example: Let's say we found a bug in `exercise_1_solution`
 The workflow to fix it could be as follows (assuming that `exercise_6_solution` is the last branch):
 ```sh
+git pull
+./setup_exercise_branches.sh
 git checkout exercise_1_solution
 # Make changes
 git add --update
 git commit
 git rebase --update-refs exercise_1_solution exercise_6_solution
+<<<<<<< Updated upstream
 git push --all
 ```
+=======
+# IMPORTANT: Pause and look at your commit graph. Only if it looks like you expect, proceed with force-pushing. You may otherwise permanently delete things!
+# git push --all --force
+```
+>>>>>>> Stashed changes
