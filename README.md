@@ -23,11 +23,6 @@ git checkout exercise_1_solution
 git add --update
 git commit
 git rebase --update-refs exercise_1_solution exercise_6_solution
-<<<<<<< Updated upstream
-git push --all
-```
-=======
 # IMPORTANT: Pause and look at your commit graph. Only if it looks like you expect, proceed with force-pushing. You may otherwise permanently delete things!
 # git push --all --force
 ```
->>>>>>> Stashed changes
