@@ -1,0 +1,32 @@
+<html>
+    <script>
+        function lsp() {
+            const bird = new Bird();
+            console.log(bird.fly());
+            const kiwi = new Kiwi();
+            console.log(kiwi.fly());
+        }
+
+        class Bird {
+            fly(speed) {
+                return `Flying at ${speed}`;
+            }
+        }
+
+        // correct LSP
+        class Parrot extends Bird {
+            fly(speed) {
+                return `Fly ... ${speed}`;
+            }
+        }
+
+        // LSP Violation:
+        class Kiwi extends Bird {
+            fly() {
+                return new Error("Not possible");
+            }
+        }
+
+        lsp();
+    </script>
+</html>
