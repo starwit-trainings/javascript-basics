@@ -13,17 +13,17 @@
             }
         }
 
-        // correct LSP
-        class Parrot extends Bird {
-            fly(speed) {
-                return `Fly ... ${speed}`;
-            }
-        }
-
         // LSP Violation:
         class Kiwi extends Bird {
             fly() {
                 return new Error("Not possible");
+            }
+        }
+
+        // correct LSP
+        class Parrot extends Bird {
+            fly(speed) {
+                return `Fly ... ${speed}`;
             }
         }
 
